@@ -799,27 +799,22 @@
     <!--=============== SWIPER JS ===============-->
         <script src="{% static 'assets/js/language.js' %}"></script>
 
-   <script>
+<script>
 document.addEventListener('DOMContentLoaded', () => {
     const openBtn = document.getElementById('openCurrencyMenu');
     const closeBtn = document.getElementById('closeMenu');
     const menu = document.getElementById('currencyMenu');
-    const menuItems = document.querySelectorAll('.menu-item[data-currency]'); // ✅ تم التعديل هنا
+    const menuItems = document.querySelectorAll('.menu-item[data-currency]');
     const currentCurrencyEl = document.getElementById('currentCurrency');
     const currentFlag = document.getElementById('currentFlag');
     const priceEls = document.querySelectorAll('.menu__preci');
 
-    const basePrices = {
-        package1: 55,
-        package2: 97,
-        package3: 39
-    };
-
-    const exchangeRates = {
-        USD: 1,
-        EGP: 30.9,
-        SAR: 3.75,
-        AED: 3.67
+    // ✅ أسعار الباقات مباشرة لكل عملة
+    const packagePrices = {
+        package1: { EGP: 55, USD: 98, SAR: 79, AED: 32 },
+        package2: { EGP: 95, USD: 63, SAR: 18, AED: 96 },
+        package3: { EGP: 993, USD: 232, SAR: 155, AED: 691 },
+        package4: { EGP: 289, USD: 2362, SAR: 456, AED: 456123 }
     };
 
     const flagMap = {
@@ -840,11 +835,13 @@ document.addEventListener('DOMContentLoaded', () => {
         currentCurrencyEl.textContent = currency;
         currentFlag.innerHTML = `<img src="/static/assets/img/${flagMap[currency]}" width="20">`;
 
+        // تحديث أسعار الباقات من packagePrices
         priceEls.forEach((el, index) => {
             const packageName = `package${index + 1}`;
-            const usdPrice = basePrices[packageName];
-            const converted = (usdPrice * exchangeRates[currency]).toFixed(2);
-            el.textContent = currency === 'USD' ? `$${usdPrice}` : `${converted} ${currency}`;
+            const price = packagePrices[packageName][currency];
+            el.textContent = currency === 'USD'
+                ? `$${price}`
+                : `${price} ${currency}`;
         });
     }
 
@@ -875,13 +872,55 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // عرض الأسعار بالدولار مبدئيًا
-    Object.keys(basePrices).forEach((key, index) => {
-        const price = basePrices[key];
-        if (priceEls[index]) {
-            priceEls[index].textContent = `$${price}`;
+    // تعيين الأسعار الافتراضية عند التحميل لأول مرة
+    const defaultCurrency = 'USD';
+    setCurrency(defaultCurrency);
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const bookPrices = {
+        book1: {
+            USD: 69,
+            EGP: 55,
+            SAR: 93,
+            AED: 22
+        },
+        book2: {
+            USD: 77,
+            EGP: 96,
+            SAR: 39,
+            AED: 13
+        }
+    };
+
+    function updateBookPrices(currency) {
+        const book1PriceEl = document.getElementById('book1-price');
+        const book2PriceEl = document.getElementById('book2-price');
+
+        if (book1PriceEl && book2PriceEl && bookPrices.book1[currency] && bookPrices.book2[currency]) {
+            book1PriceEl.textContent = `${bookPrices.book1[currency]} ${currency}`;
+            book2PriceEl.textContent = `${bookPrices.book2[currency]} ${currency}`;
+        }
+    }
+
+    // نحاول ننتظر لما العنصر الأساسي يحدد العملة ويحدثها
+    const observer = new MutationObserver(() => {
+        const currency = document.getElementById('currentCurrency')?.textContent?.trim();
+        if (currency) {
+            updateBookPrices(currency);
         }
     });
+
+    const targetNode = document.getElementById('currentCurrency');
+    if (targetNode) {
+        observer.observe(targetNode, { childList: true });
+    }
+
+    // fallback: أول مرة تحميل
+    const initCurrency = document.getElementById('currentCurrency')?.textContent?.trim() || 'USD';
+    updateBookPrices(initCurrency);
 });
 </script>
 
