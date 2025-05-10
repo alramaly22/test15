@@ -81,13 +81,15 @@
                 <span style="color: #ff9500;">اختر اللغة</span>
             </div>
             <div class="menu-options">
-                <div class="menu-item lang-btn" data-lang-btn="en">
-                    <span>English</span>
+                    <div class="menu-item lang-btn" data-lang-btn="en">
+                        <img src="{% static 'assets/img/usd.webp' %}" alt="العلم الأمريكي" class="flag-icon">
+                        <span>English</span>
+                    </div>
+                    <div class="menu-item lang-btn" data-lang-btn="ar">
+                        <img src="{% static 'assets/img/saudi.webp' %}" alt="العلم السعودي" class="flag-icon">
+                        <span>العربية</span>
+                    </div>
                 </div>
-                <div class="menu-item lang-btn" data-lang-btn="ar">
-                    <span>العربية</span>
-                </div>
-            </div>
         </div>
 
         <div class="nav__toggle" id="nav-toggle">
@@ -454,7 +456,7 @@
                                 <li data-lang="ov6">Protein-packed smoothies for post-workout recovery</li>
                             </ul>
                             <p class="book__price" id="book1-price">150 EGP</p>
-                            <button class="book__btn" data-lang="bookbutton1">📥 Buy Now</button>
+                                <button class="book__btn" onclick="openBookPaymentModal('book2')" data-lang="bookbutton2">📥 Buy Now</button>
                         </div>
                     </div>
         
@@ -475,7 +477,7 @@
                                 <li data-lang="ov10">Helpful for weight loss, muscle gain, or maintaining a healthy lifestyle</li>
                             </ul>
                             <p class="book__price" id="book2-price">120 EGP</p>
-                            <button class="book__btn" data-lang="bookbutton2">📥 Buy Now</button>
+                            <button class="book__btn" onclick="openBookPaymentModal('book2')" data-lang="bookbutton2">📥 Buy Now</button>
                         </div>
                     </div>
                 </div>
@@ -922,6 +924,104 @@ document.addEventListener('DOMContentLoaded', () => {
     const initCurrency = document.getElementById('currentCurrency')?.textContent?.trim() || 'USD';
     updateBookPrices(initCurrency);
 });
+</script>
+<script>
+function openBookPaymentModal(bookId) {
+    const currency = document.getElementById('currentCurrency').textContent.trim();
+
+    const fawaterkLinks = {
+        book1: {
+            EGP: "https://fawaterk.com/pay/book1-egp",
+            USD: "https://fawaterk.com/pay/book1-usd",
+            SAR: "https://fawaterk.com/pay/book1-sar",
+            AED: "https://fawaterk.com/pay/book1-aed"
+        },
+        book2: {
+            EGP: "https://fawaterk.com/pay/book2-egp",
+            USD: "https://fawaterk.com/pay/book2-usd",
+            SAR: "https://fawaterk.com/pay/book2-sar",
+            AED: "https://fawaterk.com/pay/book2-aed"
+        }
+    };
+
+    const paypalLinks = {
+        book1: {
+            EGP: "https://paypal.com/pay/book1-egp",
+            USD: "https://paypal.com/pay/book1-usd",
+            SAR: "https://paypal.com/pay/book1-sar",
+            AED: "https://paypal.com/pay/book1-aed"
+        },
+        book2: {
+            EGP: "https://paypal.com/pay/book2-egp",
+            USD: "https://paypal.com/pay/book2-usd",
+            SAR: "https://paypal.com/pay/book2-sar",
+            AED: "https://paypal.com/pay/book2-aed"
+        }
+    };
+
+    const fawaterkLink = fawaterkLinks[bookId][currency];
+    const paypalLink = paypalLinks[bookId][currency];
+
+    const modalHTML = `
+        <div id="bookPaymentModal" class="payment-modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeBookPaymentModal()">&times;</span>
+                <h3 style="margin-bottom: 1rem;">اختر طريقة الدفع للكتاب</h3>
+                <div class="payment-buttons">
+                    <a href="${fawaterkLink}" class="btn btn-cart">الدفع عبر فواتيرك</a>
+                    <a href="${paypalLink}" class="btn btn-cart" style="background-color: #0070ba;">الدفع عبر PayPal</a>
+                </div>
+            </div>
+        </div>
+    `;
+
+    const modalStyle = `
+        <style id="book-modal-style">
+            .payment-modal {
+                position: fixed;
+                z-index: 9999;
+                left: 0; top: 0;
+                width: 100%; height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .modal-content {
+                background: #fff;
+                padding: 2rem;
+                border-radius: 1rem;
+                text-align: center;
+                position: relative;
+            }
+            .close-btn {
+                position: absolute;
+                top: 10px;
+                right: 15px;
+                cursor: pointer;
+                font-size: 24px;
+            }
+            .payment-buttons a {
+                display: inline-block;
+                margin: 10px;
+                padding: 0.8rem 1.5rem;
+                border-radius: 8px;
+                color: white;
+                text-decoration: none;
+            }
+        </style>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    document.head.insertAdjacentHTML('beforeend', modalStyle);
+}
+
+function closeBookPaymentModal() {
+    const modal = document.getElementById('bookPaymentModal');
+    const style = document.getElementById('book-modal-style');
+    if (modal) modal.remove();
+    if (style) style.remove();
+}
 </script>
 
           <!--=============== MAIN JS ===============-->
