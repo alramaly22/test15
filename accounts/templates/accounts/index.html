@@ -22,81 +22,81 @@
 <body>
     <!--==================== HEADER ====================-->
     <header class="header" id="header">
-    <nav class="nav container">
-        <a href="{% url 'index' %}" class="nav__logo">
-            <img style="width: 60%;" src="{% static 'assets/img/logo-2.svg' %}" alt="" class="logohat">
-        </a>
+        <nav class="nav container">
+            <a href="{% url 'index' %}" class="nav__logo">
+                <img style="width: 60%;" src="{% static 'assets/img/logo-2.svg' %}" alt="" class="logohat">
+            </a>
 
-        <div class="nav__menu" id="nav-menu">
-            <ul class="nav__list">
-                <li><a href="#home" class="nav__link" data-lang="homenav">HOME</a></li>
-                <li><a href="{% url 'about' %}" class="nav__link" data-lang="aboutnav">ABOUT</a></li>
-                <li><a href="#trans" class="nav__link" data-lang="transvnav">TRANSFORMATION</a></li>
-                <li><a href="#testimonial" class="nav__link" data-lang="testimonialvnav">TESTIMONIAL</a></li>
-                <li><a href="#menu" class="nav__link" data-lang="packagevnav">PACKAGE</a></li>
-                <li><a href="{% url 'calc' %}" class="nav__link" data-lang="clacvnav">CALCULATOR</a></li>
-            </ul>
-            <div class="nav__colse" id="nav-close">
-                <i class="ri-close-large-line"></i>
-            </div>
-        </div>
-
-        <button type="button" id="openCurrencyMenu" class="btn--rounded-gray">
-            <span class="flag-icon" id="currentFlag">
-                <img src="{% static 'assets/img/usd.webp' %}" width="20" />
-            </span>
-            <span class="mx-1.5">|</span>
-            <span id="currentCurrency">USD</span>
-        </button>
-
-        <!-- Currency and Language Menu -->
-        <div class="language-currency-menu popup" id="currencyMenu">
-            <div class="menu-header">
-                <span style="color: #ff9500;">اختر اللغة والعملة</span>
-                <span class="close-btn" id="closeMenu">&times;</span>
-            </div>
-
-            <!-- Currency Options -->
-            <div class="menu-options">
-                <div class="menu-item" data-lang="ar" data-currency="EGP" data-flag="eg.png">
-                    <img src="{% static 'assets/img/eg.png' %}" alt="العلم المصري" class="flag-icon">
-                    <span> الجنيه المصري (EGP)</span>
-                </div>
-                <div class="menu-item" data-lang="ar" data-currency="SAR" data-flag="saudi.webp">
-                    <img src="{% static 'assets/img/saudi.webp' %}" alt="العلم السعودي" class="flag-icon">
-                    <span> الريال السعودي (SAR)</span>
-                </div>
-                <div class="menu-item" data-lang="ar" data-currency="AED" data-flag="unitearab.webp">
-                    <img src="{% static 'assets/img/unitearab.webp' %}" alt="العلم الإماراتي" class="flag-icon">
-                    <span> الدرهم الإماراتي (AED)</span>
-                </div>
-                <div class="menu-item" data-lang="en" data-currency="USD" data-flag="usd.webp">
-                    <img src="{% static 'assets/img/usd.webp' %}" alt="العلم الأمريكي" class="flag-icon">
-                    <span> US Dollar (USD)</span>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li><a href="#home" class="nav__link" data-lang="homenav">HOME</a></li>
+                    <li><a href="{% url 'about' %}" class="nav__link" data-lang="aboutnav">ABOUT</a></li>
+                    <li><a href="#trans" class="nav__link" data-lang="transvnav">TRANSFORMATION</a></li>
+                    <li><a href="#testimonial" class="nav__link" data-lang="testimonialvnav">TESTIMONIAL</a></li>
+                    <li><a href="#menu" class="nav__link" data-lang="packagevnav">PACKAGE</a></li>
+                    <li><a href="{% url 'calc' %}" class="nav__link" data-lang="clacvnav">CALCULATOR</a></li>
+                </ul>
+                <div class="nav__colse" id="nav-close">
+                    <i class="ri-close-large-line"></i>
                 </div>
             </div>
 
-            <!-- Language Options -->
-            <div class="menu-header" style="margin-top: 1rem;">
-                <span style="color: #ff9500;">اختر اللغة</span>
-            </div>
-            <div class="menu-options">
-                    <div class="menu-item lang-btn" data-lang-btn="en">
-                        <img src="{% static 'assets/img/usd.webp' %}" alt="العلم الأمريكي" class="flag-icon">
-                        <span>English</span>
+            <button type="button" id="openCurrencyMenu" class="btn--rounded-gray">
+                <span class="flag-icon" id="currentFlag">
+                    <img src="{% static 'assets/img/usd.webp' %}" width="20" />
+                </span>
+                <span class="mx-1.5">|</span>
+                <span id="currentCurrency">USD</span>
+            </button>
+
+            <!-- Currency and Language Menu -->
+            <div class="language-currency-menu popup" id="currencyMenu">
+                <div class="menu-header">
+                    <span style="color: #ff9500;">اختر اللغة والعملة</span>
+                    <span class="close-btn" id="closeMenu">&times;</span>
+                </div>
+
+                <!-- Currency Options -->
+                <div class="menu-options">
+                    <div class="menu-item" data-lang="ar" data-currency="EGP" data-flag="eg.png">
+                        <img src="{% static 'assets/img/eg.png' %}" alt="العلم المصري" class="flag-icon">
+                        <span> الجنيه المصري (EGP)</span>
                     </div>
-                    <div class="menu-item lang-btn" data-lang-btn="ar">
+                    <div class="menu-item" data-lang="ar" data-currency="SAR" data-flag="saudi.webp">
                         <img src="{% static 'assets/img/saudi.webp' %}" alt="العلم السعودي" class="flag-icon">
-                        <span>العربية</span>
+                        <span> الريال السعودي (SAR)</span>
+                    </div>
+                    <div class="menu-item" data-lang="ar" data-currency="AED" data-flag="unitearab.webp">
+                        <img src="{% static 'assets/img/unitearab.webp' %}" alt="العلم الإماراتي" class="flag-icon">
+                        <span> الدرهم الإماراتي (AED)</span>
+                    </div>
+                    <div class="menu-item" data-lang="en" data-currency="USD" data-flag="usd.webp">
+                        <img src="{% static 'assets/img/usd.webp' %}" alt="العلم الأمريكي" class="flag-icon">
+                        <span> US Dollar (USD)</span>
                     </div>
                 </div>
-        </div>
 
-        <div class="nav__toggle" id="nav-toggle">
-            <i class="ri-apps-2-fill"></i>
-        </div>
-    </nav>
-</header>
+                <!-- Language Options -->
+                <div class="menu-header" style="margin-top: 1rem;">
+                    <span style="color: #ff9500;">اختر اللغة</span>
+                </div>
+                <div class="menu-options">
+                        <div class="menu-item lang-btn" data-lang-btn="en">
+                            <img src="{% static 'assets/img/usd.webp' %}" alt="العلم الأمريكي" class="flag-icon">
+                            <span>English</span>
+                        </div>
+                        <div class="menu-item lang-btn" data-lang-btn="ar">
+                            <img src="{% static 'assets/img/saudi.webp' %}" alt="العلم السعودي" class="flag-icon">
+                            <span>العربية</span>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-apps-2-fill"></i>
+            </div>
+        </nav>
+    </header>
 
   <!--==================== MAIN ====================-->
     <main class="main">
@@ -813,10 +813,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ✅ أسعار الباقات مباشرة لكل عملة
     const packagePrices = {
-        package1: { EGP: 55, USD: 98, SAR: 79, AED: 32 },
-        package2: { EGP: 95, USD: 63, SAR: 18, AED: 96 },
-        package3: { EGP: 993, USD: 232, SAR: 155, AED: 691 },
-        package4: { EGP: 289, USD: 2362, SAR: 456, AED: 456123 }
+        package1: { EGP: 499, USD: 19, SAR: 49, AED: 49 },
+        package2: { EGP: 499, USD: 19, SAR: 49, AED: 49 },
+        package3: { EGP: 499, USD: 19, SAR: 49, AED: 49 },
+        package4: { EGP: 499, USD: 19, SAR: 49, AED: 49 }
     };
 
     const flagMap = {
